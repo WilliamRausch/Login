@@ -3,11 +3,19 @@ const router = express.Router();
 let errors;
 let messages;
 let user = {
- 	username: "Will",
+ 	username: "WilliamRausch",
  	password: "password"
 
  };
  let obj;
+// function authenticate(req, res, next) {
+//   if (req.session.token) {
+//     res.redirect("/results");
+//   } else {
+//     console.log("No token");
+//     next();
+//   }
+// }
 
 router.get("/", function (req, res){
 	if(!req.session.token){
@@ -25,7 +33,7 @@ router.post("/",function(req, res){
 	req.checkBody("password", "password cannot be empty.").notEmpty();
 	req.checkBody("username", "name too long").isLength({max: 25});
 	req.checkBody("password", "password too short").isLength({min: 8});
-	req.checkBody("username", "name too long").isLength({min: 8});
+	req.checkBody("username", "name too short").isLength({min: 8});
 	req.checkBody("password", "no special characters").isAlpha();
 	
 errors = req.getValidationResult();
