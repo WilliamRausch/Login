@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 let errors;
 let messages;
- let user = {
+let user = {
  	username: "Will",
  	password: "password"
 
