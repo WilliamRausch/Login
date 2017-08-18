@@ -8,6 +8,7 @@ let user = {
 
  };
  let obj;
+ let errs;
 // function authenticate(req, res, next) {
 //   if (req.session.token) {
 //     res.redirect("/results");
@@ -16,6 +17,10 @@ let user = {
 //     next();
 //   }
 // }
+router.get("/logout", function(req,res){
+	req.session.token = "";
+	res.redirect("/");
+});
 
 router.get("/", function (req, res){
 	if(!req.session.token){
@@ -25,7 +30,7 @@ router.get("/", function (req, res){
 }
 });
 router.get("/login", function(req, res){
-	res.render("login", messages)
+	res.render("login", errs)
 
 });
 router.post("/",function(req, res){
@@ -45,6 +50,9 @@ errors.then(function(result) {
 
   console.log("hello");
     console.log(messages);
+    errs = {
+    	messages: messages
+    }
     if(messages.length > 0){
     	res.redirect("/login");
 
